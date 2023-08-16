@@ -1,0 +1,28 @@
+x = 1
+y = 1
+listA = []
+listB = []
+sumaA = 0
+sumaB = 0
+while x <= 2:
+    add_list = input("digite num para A: ")
+    listA.append(add_list)
+    x += 1
+while y <= 2:
+    add_listb = input("digite num para B: ")
+    listB.append(add_listb)
+    y += 1
+
+for n in listA:
+    sumaA += int(n)
+for n in listB:
+    sumaB += int(n)
+
+print(f"Lista A: {listA}")
+print(f"Lista B: {listB}")
+if sumaA > sumaB:
+    print(f'La lista A "{listA}" es mayor')
+elif sumaB > sumaA:
+    print(f'La lista B "{listB}" es mayor')
+else:
+    print(f"Lista A {listA} y lista B {listB} son iguales")
