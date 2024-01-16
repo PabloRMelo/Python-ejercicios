@@ -1,0 +1,76 @@
+import os, time, random
+
+class Persona:
+    def __init__(self, nombre, apellido):
+        self.nombre = nombre
+        self.apellido = apellido
+
+class Cliente(Persona):
+    def __init__(self, nombre, apellido, num_cuenta, balance = 0):
+        super().__init__(nombre, apellido)
+        self.balance = balance
+        self.num_cuenta = num_cuenta
+        
+    def __str__(self) -> str:
+        return f"Nombre del cliente: {self.nombre} {self.apellido}\nCuenta Nº: {self.num_cuenta}\nBalance: ${self.balance}"
+    
+    def depositar(self):
+        deposito = float(input("Cuánto deseas ingresar?: "))
+        self.balance+= deposito
+        print(f"Balance total: {self.balance}")
+        print("Deposito hecho con éxito. Gracias.")
+        
+    def retirar(self):
+        while True:
+            retirada = float(input("Cuánto desea retirar?: "))
+            if retirada > self.balance:
+                print(f"No hay saldo suficiente. Su saldo es de {self.balance}")
+                time.sleep(2)
+                os.system("cls")
+                break
+            else:
+                self.balance -= retirada
+                print(f"Retirada de ${retirada} con éxito. Gracias")
+                print(f"Balance total: {self.balance}")
+                break
+    
+
+
+
+def crear_cliente():
+    print("### Creación de nuevo cliente ###\n")
+    nombre = input("Ingrese el primer nombre: ")
+    apellido = input("Ingese los apellidos: ")
+    num_cuenta = random.randint(1000000000, 10000000000000)
+    
+    return Cliente(nombre, apellido,num_cuenta)
+    
+def menu(cliente):
+    
+    while True:
+        opcion = int(input("""¿Qué operación quieres hacer?
+                1. Depositar
+                2. Retirar
+                3. Datos del cliente
+                4. Salir\n
+                >>>> """))
+        if opcion == 1:
+            time.sleep(1)
+            os.system("cls")
+            cliente.depositar()
+        elif opcion == 2:
+            time.sleep(1)
+            os.system("cls")
+            cliente.retirar()
+        elif opcion == 3:
+            print(cliente)
+        elif opcion == 4:
+            print("Gracias por usar nuestro banco.")
+            time.sleep(1)
+            exit()
+        else:
+            print("Error. Digite la opción correcta.")
+
+cliente = crear_cliente()
+
+menu(cliente)   
